@@ -76,7 +76,7 @@ def parseState(fromString):
         end = rl.find(")")
         rl = rl[:end]
         rl = rl.strip()
-        print(rl)
+        # print(rl)
     return rl
 
 
@@ -87,7 +87,20 @@ Parameters: str
 Returns: list of strs
 '''
 def findHashtags(message):
-    return
+    sp = message.split("#")
+    stri=""
+    data=[]
+    for x in sp[1:]:
+        for y in x:
+            if y not in endChars:
+                stri+=y
+            else:
+                break
+        data.append("#"+stri)
+        stri = ""
+    # print(stri)
+    # print(data)
+    return data
 
 
 '''
@@ -291,6 +304,7 @@ if __name__ == "__main__":
     test.testParseName()
     test.testParsePosition()
     test.testParseState()
+    test.testFindHashtags()
     ## Uncomment these for Week 2 ##
     """print("\n" + "#"*15 + " WEEK 2 TESTS " +  "#" * 16 + "\n")
     test.week2Tests()
