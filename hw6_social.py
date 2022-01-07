@@ -4,6 +4,7 @@ Name:
 Roll Number:
 """
 
+from tkinter.font import names
 import hw6_social_tests as test
 
 project = "Social" # don't edit this
@@ -108,10 +109,11 @@ Parameters: dataframe ; str
 Returns: str
 '''
 def getRegionFromState(stateDf, state):
-    df= stateDf
+    df = stateDf
     row = df.loc[df["state"] == state,"region" ]
-    # print(row)
-    return row.values[0]
+    val = row.values[0] 
+    # print(val)
+    return val
 
 
 '''
@@ -121,7 +123,23 @@ Parameters: dataframe ; dataframe
 Returns: None
 '''
 def addColumns(data, stateDf):
-    return
+    name = []
+    position = []
+    states = []
+    region = []
+    hashtags = []
+    for index, row in data.iterrows():
+        name.append(parseName(row["label"]))
+        position.append(parsePosition(row["label"]))
+        states.append(parseState(row["label"]))
+        region.append(getRegionFromState(stateDf,parseState(row["label"])))
+        hashtags.append(findHashtags(row["text"]))
+    data["name"] = name
+    data["position"] = position
+    data["state"] = states
+    data["region"] = region
+    data["hashtags"] = hashtags
+    return None
 
 
 ### PART 2 ###
@@ -306,7 +324,8 @@ if __name__ == "__main__":
     # test.testParsePosition()
     # test.testParseState()
     # test.testFindHashtags()
-    test.testGetRegionFromState()
+    # test.testGetRegionFromState()
+    test.testAddColumns()
     ## Uncomment these for Week 2 ##
     """print("\n" + "#"*15 + " WEEK 2 TESTS " +  "#" * 16 + "\n")
     test.week2Tests()
