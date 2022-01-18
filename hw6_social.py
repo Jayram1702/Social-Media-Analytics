@@ -239,7 +239,9 @@ Parameters: dict mapping strs to ints ; int
 Returns: dict mapping strs to ints
 '''
 def mostCommonHashtags(hashtags, count):
-    return
+    cmh=dict(sorted(hashtags.items(), key=lambda x: x[1], reverse=True))
+    cnt=dict([(i,j) for (i,j) in cmh.items()] [:count])
+    return cnt
 
 
 '''
@@ -376,7 +378,8 @@ if __name__ == "__main__":
     addSentimentColumn(df)
     # test.testGetDataCountByState(df)
     # test.testGetDataForRegion(df)
-    test.testGetHashtagRates(df)
+    # test.testGetHashtagRates(df)
+    test.testMostCommonHashtags(df)
 
 
     ## Uncomment these for Week 3 ##
