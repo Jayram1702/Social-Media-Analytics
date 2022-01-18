@@ -223,8 +223,14 @@ Parameters: dataframe
 Returns: dict mapping strs to ints
 '''
 def getHashtagRates(data):
-    return
-
+    hash={}
+    for a in data["hashtags"]:
+        for b in a:
+            if len(b)!=0 and b not in hash:
+                hash[b]=1
+            else:
+                hash[b]+=1
+    return hash
 
 '''
 mostCommonHashtags(hashtags, count)
@@ -369,7 +375,8 @@ if __name__ == "__main__":
     addColumns(df, stateDf)
     addSentimentColumn(df)
     # test.testGetDataCountByState(df)
-    test.testGetDataForRegion(df)
+    # test.testGetDataForRegion(df)
+    test.testGetHashtagRates(df)
 
 
     ## Uncomment these for Week 3 ##
