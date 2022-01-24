@@ -112,7 +112,6 @@ def getRegionFromState(stateDf, state):
     df = stateDf
     row = df.loc[df["state"] == state,"region" ]
     val = row.values[0] 
-    # print(val)
     return val
 
 
@@ -169,7 +168,6 @@ def addSentimentColumn(data):
     classifier = SentimentIntensityAnalyzer()
     sentiment = []
     for index, row in data.iterrows():
-        # print(index, row)
         sentiment.append(findSentiment(classifier, row["text"]))
     data["sentiment"] = sentiment
     return None
@@ -243,7 +241,6 @@ def mostCommonHashtags(hashtags, count):
     cnt=dict([(i,j) for (i,j) in cmh.items()] [:count])
     return cnt
 
-
 '''
 getHashtagSentiment(data, hashtag)
 #7 [Check6-2]
@@ -264,7 +261,6 @@ def getHashtagSentiment(data, hashtag):
             TotHasgs+=1
     return Hasgcount/TotHasgs
 
-
 ### PART 3 ###
 
 '''
@@ -284,7 +280,6 @@ def graphStateCounts(stateCounts, title):
     plt.title(title)
     plt.show()
     return
-
 
 '''
 graphTopNStates(stateCounts, stateFeatureCounts, n, title)
@@ -425,17 +420,17 @@ if __name__ == "__main__":
     test.week2Tests()
     print("\n" + "#"*15 + " WEEK 2 OUTPUT " + "#" * 15 + "\n")
     test.runWeek2()"""
-    # df = makeDataFrame("data/politicaldata.csv")
-    # stateDf = makeDataFrame("data/statemappings.csv")
-    # addColumns(df, stateDf)
-    # addSentimentColumn(df)
-    # # test.testGetDataCountByState(df)
+    df = makeDataFrame("data/politicaldata.csv")
+    stateDf = makeDataFrame("data/statemappings.csv")
+    addColumns(df, stateDf)
+    addSentimentColumn(df)
+    # test.testGetDataCountByState(df)
     # # test.testGetDataForRegion(df)
     # # test.testGetHashtagRates(df)
-    # # test.testMostCommonHashtags(df)
+    test.testMostCommonHashtags(df)
     # test.testGetHashtagSentiment(df)
 
 
     ## Uncomment these for Week 3 ##
-    print("\n" + "#"*15 + " WEEK 3 OUTPUT " + "#" * 15 + "\n")
-    test.runWeek3()
+    # print("\n" + "#"*15 + " WEEK 3 OUTPUT " + "#" * 15 + "\n")
+    # test.runWeek3()
